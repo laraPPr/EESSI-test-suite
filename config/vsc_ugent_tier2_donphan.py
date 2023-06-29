@@ -46,7 +46,13 @@ site_configuration = {
                 {
                     'name': 'donphan',
                     'scheduler': 'slurm',
+                    'prepare_cmds': [
+                        'source /cvmfs/pilot.eessi-hpc.org/latest/init/bash',
+                        'export SLURM_EXPORT_ENV=ALL',
+                        'export OMPI_MCA_pml=ucx',
+                    ]
                     'environs': ['default'],
+                    'access':  ['-p cpu', '--export=None'],
                     'descr': 'cpu nodes',
                     'max_jobs': 1,
                     'launcher': 'mympirun',
