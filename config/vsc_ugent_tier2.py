@@ -87,32 +87,6 @@ site_configuration = {
                 }
             ]
         },
-        {   
-            'name': 'skitty',
-            'descr': 'skitty cpu only',
-            'hostnames': ['gligar.*.gastly.os'],
-            'modules_system': 'lmod',
-            'partitions': [
-                {
-                    'name': 'skitty',
-                    'scheduler': 'slurm',
-                    'environs': ['default'],
-                    'descr': 'CPU nodes (intel-skylake, 177GiB RAM)',
-                    'max_jobs': 72,
-                    'launcher': 'mympirun',
-                    'modules': ['vsc-mympirun'],
-                    'processor': {
-                        'num_cpus': 36,
-                        'num_sockets': 2,
-                        'num_cpus_per_socket': 18,
-                        'arch': 'skylake',
-                    },
-                    'features': [
-                        'cpu',
-                    ],
-                }
-            ]   
-        },
         {
             'name': 'victini',
             'descr': 'victini cpu only',
@@ -184,6 +158,31 @@ site_configuration = {
                         'num_sockets': 2,
                         'num_cpus_per_socket': 64,
                         'arch': 'zen3',
+                    },
+                    'features': [
+                        'cpu',
+                    ],
+                }
+            ]
+        },
+        { 
+            'name': 'donphan',
+            'descr': 'donphan cpu only',
+            'hostnames': ['gligar.*.gastly.os'],
+            'modules_system': 'lmod',
+            'partitions': [
+                {
+                    'name': 'donpahn',
+                    'scheduler': 'slurm',
+                    'environs': ['default'],
+                    'descr': 'cpu nodes (Intel Cascade Lake, 738GiB RAM)',
+                    'max_jobs': 16,
+                    'launcher': 'mympirun',
+                    'modules': ['vsc-mympirun'],
+                    'processor': {
+                        'num_cpus': 36,
+                        'num_sockets': 2,
+                        'num_cpus_per_socket': 18,
                     },
                     'features': [
                         'cpu',
