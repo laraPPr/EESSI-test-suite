@@ -60,8 +60,9 @@ site_configuration = {
                     'processor': {
                         'num_cpus': 8,
                     },
-                    'features': ['cpu',],
-
+                    'features': [
+                        'cpu',
+                    ],
                 },
             ]
         },
