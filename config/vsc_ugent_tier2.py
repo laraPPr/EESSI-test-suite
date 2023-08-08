@@ -1,3 +1,6 @@
+# the reframe command needs to contain the following in order to help ReFrame with selecting the system since it uses hostname as the selection parameter and it is the same for all clusters.
+# `--system $SLURM_CLUSTERS`
+
 from reframe.core.backends import register_launcher
 from reframe.core.launchers import JobLauncher
 import os
@@ -36,6 +39,34 @@ class MyMpirunLauncher(JobLauncher):
 site_configuration = {
     'systems': [
         {
+            'name': 'doduo',
+            'descr': 'doduo cpu only',
+            'hostnames': ['gligar.*.gastly.os'],
+            'modules_system': 'lmod',
+            'partitions': [
+                {
+                    'name': 'doduo',
+                    'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/doduo'],
+                    'access': ['--clusters=doduo'],
+                    'environs': ['default'],
+                    'descr': 'GPU nodes (AMD Rome, 250GiB RAM)',
+                    'max_jobs': 128,
+                    'launcher': 'mympirun',
+                    'modules': ['vsc-mympirun'],
+                    'processor': {
+                        'num_cpus': 96,
+                        'num_sockets': 2,
+                        'num_cpus_per_socket': 48,
+                        'arch': 'zen2',
+                    },
+                    'features': [
+                        'cpu',                     
+                    ],
+                }
+            ]   
+        },
+        {
             'name': 'swalot',
             'descr': 'swalot cpu only',
             'hostnames': ['gligar.*.gastly.os'],
@@ -44,6 +75,8 @@ site_configuration = {
                 {
                     'name': 'swalot',
                     'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/swalot'],
+                    'access': ['--clusters=swalot'],
                     'environs': ['default'],
                     'descr': 'CPU nodes (intel-haswell, 116GiB RAM)',
                     'max_jobs': 128,
@@ -70,6 +103,8 @@ site_configuration = {
                 {
                     'name': 'skitty',
                     'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/skitty'],
+                    'access': ['--clusters=skitty'],
                     'environs': ['default'],
                     'descr': 'CPU nodes (intel-skylake, 177GiB RAM)',
                     'max_jobs': 72,
@@ -96,6 +131,8 @@ site_configuration = {
                 {
                     'name': 'victini',
                     'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/victini'],
+                    'access': ['--clusters=victini'],
                     'environs': ['default'],
                     'descr': 'CPU nodes (intel-skylake, 88GiB RAM)',
                     'max_jobs': 96,
@@ -113,32 +150,6 @@ site_configuration = {
                 }
             ]
         },
-        {
-            'name': 'doduo',
-            'descr': 'doduo cpu only',
-            'hostnames': ['gligar.*.gastly.os'],
-            'modules_system': 'lmod',
-            'partitions': [
-                {
-                    'name': 'doduo',
-                    'scheduler': 'slurm',
-                    'environs': ['default'],
-                    'descr': 'GPU nodes (AMD Rome, 250GiB RAM)',
-                    'max_jobs': 128,
-                    'launcher': 'mympirun',
-                    'modules': ['vsc-mympirun'],
-                    'processor': {
-                        'num_cpus': 96,
-                        'num_sockets': 2,
-                        'num_cpus_per_socket': 48,
-                        'arch': 'zen2',
-                    },
-                    'features': [
-                        'cpu',                     
-                    ],
-                }
-            ]   
-        },      
         { 
             'name': 'gallade',
             'descr': 'gallade cpu only',
@@ -148,6 +159,8 @@ site_configuration = {
                 {
                     'name': 'gallade',
                     'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/gallade'],
+                    'access': ['--clusters=gallade'],
                     'environs': ['default'],
                     'descr': 'cpu nodes (AMD Milan, 940GiB RAM)',
                     'max_jobs': 16,
@@ -172,8 +185,10 @@ site_configuration = {
             'modules_system': 'lmod',
             'partitions': [
                 {
-                    'name': 'donpahn',
+                    'name': 'donphan',
                     'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/donphan'],
+                    'access': ['--clusters=donphan'],
                     'environs': ['default'],
                     'descr': 'cpu nodes (Intel Cascade Lake, 738GiB RAM)',
                     'max_jobs': 16,
@@ -199,6 +214,8 @@ site_configuration = {
                 {
                     'name': 'accelgor',
                     'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/accelgor'],
+                    'access': ['--clusters=accelgor'],
                     'environs': ['default'],
                     'descr': 'gpu nodes',
                     'max_jobs': 9,
@@ -236,6 +253,8 @@ site_configuration = {
                 {
                     'name': 'joltik',
                     'scheduler': 'slurm',
+                    'prepare_cmds': ['module swap cluster/joltik'],
+                    'access': ['--clusters=joltik'],
                     'environs': ['default'],
                     'descr': 'gpu nodes',
                     'max_jobs': 10,
