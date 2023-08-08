@@ -5,7 +5,7 @@ from reframe.core.backends import register_launcher
 from reframe.core.launchers import JobLauncher
 import os
 
-account = ""
+account = "my-slurm-account"
 
 # use 'info' to log to syslog
 syslog_level = 'warning'
